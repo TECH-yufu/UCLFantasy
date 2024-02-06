@@ -30,8 +30,13 @@ def pick_new_players():
 
     player_names = [player['Name'].lower() for player in players_info]
 
-    if "k. mbappé" in player_names:
-        walkout()
+    for name in player_names:
+        if "k. mbappé" == name:
+            walkout(r"src/videos/mbappe.mkv")
+            break
+        elif "e. haaland" == name:
+            walkout(r"src/videos/haaland.mkv")
+            break
 
     # Update the buttons with the new players    
     update_button_info(option1_button, players_info[0])
@@ -65,14 +70,14 @@ def show_player_info(player):
 def close_video(win):
     win.destroy()
 
-def walkout():
+def walkout(video_path):
     window = tk.Toplevel()
     window.lift()
 
     window.state('zoomed')  # maximize the window
 
     player = TkinterVideo(master=window, scaled=True)
-    player.load( r"C:\Users\Yucheng\Videos\mbappe.mkv")
+    player.load(video_path)
     player.pack(expand=True, fill="both")
 
     # Set the player size to the screen size
@@ -82,7 +87,7 @@ def walkout():
 
     window.attributes('-topmost', True)    
 
-    window.after(5000, close_video, window) # close win after 2 sec
+    window.after(25000, close_video, window) # close win after 20 sec
     player.bind("<<Ended>>", lambda event: close_video(window)) # close the win if video ended
 
     player.play() # play the video
@@ -91,7 +96,7 @@ df = pd.read_csv("src/data/UCLFantasyPlayers_knockout.csv")
 print(df.columns)
 
 # Filter out players with price less than x
-df = df.loc[df['playerPrice'] >= 5.0]
+df = df.loc[df['playerPrice'] >= 10.0]
 
 # Create the main window
 root = tk.Tk()
