@@ -1,4 +1,7 @@
 # UCLFantasy
+
+Draftsystem til Champions League og EM 2024 fantasy league på Køkken 18 👀⚽
+
 -------------
 ```
 ├── src                <- Source code for use in this project.
